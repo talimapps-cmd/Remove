@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://talimapps-cmd.github.io/Remove/sitemap.xml
+Sitemap: https://snapclean.talimapps.workers.dev/sitemap.xml
