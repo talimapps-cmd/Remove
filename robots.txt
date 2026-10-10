@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://talimapps-cmd.github.io/Remove/sitemap.xml

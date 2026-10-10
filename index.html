@@ -1,0 +1,1007 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Free Background Remover Online | SnapClean</title>
+<meta name="description" content="Remove the background from any photo in seconds. SnapClean is a free, unlimited and private image background remover that runs in your browser. No sign-up.">
+<meta name="keywords" content="background remover, remove background, remove image background, free background remover, transparent background, photo cutout, png maker, snapclean">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="author" content="SnapClean">
+<meta name="theme-color" content="#3b5bff">
+<link rel="canonical" href="https://talimapps-cmd.github.io/Remove/">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="icon-192.png" sizes="192x192" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="SnapClean">
+<meta property="og:title" content="Free Background Remover Online | SnapClean">
+<meta property="og:description" content="Remove the background from any photo in seconds. SnapClean is a free, unlimited and private image background remover that runs in your browser. No sign-up.">
+<meta property="og:url" content="https://talimapps-cmd.github.io/Remove/">
+<meta property="og:image" content="https://talimapps-cmd.github.io/Remove/icon-512.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Free Background Remover Online | SnapClean">
+<meta name="twitter:description" content="Remove the background from any photo in seconds. SnapClean is a free, unlimited and private image background remover that runs in your browser. No sign-up.">
+<meta name="twitter:image" content="https://talimapps-cmd.github.io/Remove/icon-512.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"SnapClean","url":"https://talimapps-cmd.github.io/Remove/","description":"Remove the background from any photo in seconds. SnapClean is a free, unlimited and private image background remover that runs in your browser. No sign-up.","applicationCategory":"MultimediaApplication","operatingSystem":"Any","browserRequirements":"Requires a modern web browser","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #121826;
+  --muted: #5b6478;
+  --line: #d9dee8;
+  --bg: #eef1f6;
+  --card: #ffffff;
+  --accent: #3b5bff;
+  --accent-dark: #2a45d6;
+  --err: #c92a2a;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+[hidden] { display: none !important; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  font-family: 'DM Sans', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  background: var(--bg); color: var(--ink); line-height: 1.5; min-height: 100vh;
+}
+.wrap { max-width: 680px; margin: 0 auto; padding: 20px 18px 40px; }
+
+header { display: flex; align-items: center; gap: 10px; padding: 8px 0 26px; }
+.brand { font-family: 'Bricolage Grotesque', 'DM Sans', system-ui, sans-serif; font-weight: 700; font-size: 1.3rem; letter-spacing: -0.01em; }
+
+h1 {
+  font-family: 'Bricolage Grotesque', 'DM Sans', system-ui, sans-serif; font-weight: 700;
+  font-size: clamp(2.1rem, 8vw, 3.4rem); line-height: 1.04; letter-spacing: -0.025em; max-width: 14ch;
+}
+.lead { color: var(--muted); font-size: 1.05rem; max-width: 44ch; margin: 16px 0 16px; }
+
+.pill {
+  display: inline-flex; align-items: center; gap: 8px; margin-bottom: 22px;
+  padding: 6px 12px; border: 1px solid var(--line); background: #fff; border-radius: 999px;
+  font-size: .85rem; color: var(--muted);
+}
+.pill .dot { width: 8px; height: 8px; border-radius: 50%; background: #9aa3b5; }
+.pill[data-state="loading"] .dot { background: #f59f00; }
+.pill[data-state="ready"] .dot { background: #12b886; }
+
+.card {
+  background: var(--card); border: 1px solid var(--line); border-radius: 20px;
+  padding: 18px; box-shadow: 0 8px 30px rgba(18, 24, 38, 0.06);
+}
+
+/* Upload */
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.drop {
+  display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 6px;
+  min-height: 230px; padding: 24px; border: 2px dashed #b4bfd6; border-radius: 14px; background: #f7f9fd;
+  cursor: pointer; transition: border-color .2s, background .2s;
+}
+.drop:hover, .drop.over, .drop:focus-within { border-color: var(--accent); background: #eef2ff; }
+.drop:focus-within { outline: 3px solid rgba(59, 91, 255, .35); outline-offset: 2px; }
+.drop svg { color: var(--accent); margin-bottom: 6px; }
+.drop .title { font-weight: 600; font-size: 1.1rem; }
+.drop .sub { color: var(--muted); font-size: .95rem; }
+.drop .hint { color: var(--muted); font-size: .85rem; margin-top: 6px; }
+
+/* Buttons */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 14px 22px; border-radius: 12px;
+  border: 1px solid transparent; font: inherit; font-weight: 600; cursor: pointer; transition: background .15s, border-color .15s;
+}
+.btn:focus-visible { outline: 3px solid rgba(59, 91, 255, .45); outline-offset: 2px; }
+.btn.primary { background: var(--accent); color: #fff; }
+.btn.primary:hover { background: var(--accent-dark); }
+.btn.secondary { background: #fff; color: var(--ink); border-color: var(--line); }
+.btn.secondary:hover { border-color: #aab4cc; }
+.btn.small { padding: 9px 16px; border-radius: 10px; }
+
+/* Processing */
+.busy { padding: 34px 6px; text-align: center; }
+.busy .status { font-weight: 600; margin-bottom: 16px; }
+.bar { position: relative; height: 10px; border-radius: 10px; background: #e4e9f3; overflow: hidden; }
+.bar .fill { display: block; height: 100%; width: 0%; background: var(--accent); border-radius: 10px; transition: width .25s linear; }
+.pct { font-family: 'Bricolage Grotesque', 'DM Sans', system-ui, sans-serif; font-weight: 700; font-size: 2.8rem; letter-spacing: -0.02em; line-height: 1; margin: 4px 0 14px; }
+.busy .note { color: var(--muted); font-size: .9rem; margin-top: 16px; }
+
+/* Result and compare */
+.checker {
+  background-color: #fff;
+  background-image: conic-gradient(#e4e8f1 25%, transparent 0 50%, #e4e8f1 0 75%, transparent 0);
+  background-size: 20px 20px;
+}
+.compare { --pos: 50%; position: relative; width: 100%; line-height: 0; user-select: none; -webkit-user-select: none; border: 1px solid var(--line); border-radius: 14px; overflow: hidden; }
+.compare > img, .compare canvas { display: block; width: 100%; height: auto; }
+.compare .after { position: absolute; inset: 0; clip-path: inset(0 0 0 var(--pos)); }
+.compare .after canvas { width: 100%; height: 100%; }
+.compare .handle {
+  position: absolute; top: 0; bottom: 0; left: var(--pos); width: 2px; margin-left: -1px;
+  background: #fff; box-shadow: 0 0 0 1px rgba(18, 24, 38, .15); pointer-events: none;
+}
+.compare .knob {
+  position: absolute; top: 50%; left: 50%; width: 38px; height: 38px; margin: -19px 0 0 -19px; border-radius: 50%;
+  background: #fff; box-shadow: 0 2px 10px rgba(18, 24, 38, .3); display: flex; align-items: center; justify-content: center; color: var(--ink);
+}
+.compare input[type=range] { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; cursor: ew-resize; margin: 0; touch-action: pan-y; }
+.tag {
+  position: absolute; bottom: 10px; padding: 4px 9px; border-radius: 999px; background: rgba(18, 24, 38, .72);
+  color: #fff; font-size: .75rem; line-height: 1.2; pointer-events: none;
+}
+.tag.l { left: 10px; }
+.tag.r { right: 10px; }
+
+.bgrow { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+.bgrow .label { font-weight: 600; margin-right: 4px; }
+.sw {
+  position: relative; width: 36px; height: 36px; border-radius: 50%; border: 2px solid #fff;
+  box-shadow: 0 0 0 1px var(--line); cursor: pointer; overflow: hidden; padding: 0;
+}
+.sw[aria-pressed="true"] { box-shadow: 0 0 0 3px var(--accent); }
+.sw:focus-visible { outline: 3px solid rgba(59, 91, 255, .45); outline-offset: 3px; }
+.sw.checker { background-size: 10px 10px; }
+.sw.custom { background: conic-gradient(#ff5d5d, #ffd43b, #4cd964, #3bb7ff, #b05dff, #ff5d5d); }
+.sw.custom input { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer; }
+
+.actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 22px; }
+.actions .btn { flex: 1 1 150px; }
+.actions .btn.wide { flex-basis: 100%; }
+
+.error { margin-top: 14px; padding: 12px 14px; border-radius: 12px; background: #fff1f1; border: 1px solid #f3bcbc; color: var(--err); font-size: .95rem; }
+
+.points { list-style: none; display: grid; gap: 22px; margin-top: 40px; }
+.points li { border-top: 1px solid var(--line); padding-top: 14px; }
+.points strong { display: block; margin-bottom: 2px; }
+.points span { color: var(--muted); font-size: .95rem; }
+@media (min-width: 600px) {
+  .points { grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .card { padding: 22px; }
+}
+footer { margin-top: 36px; padding-top: 18px; border-top: 1px solid var(--line); color: var(--muted); font-size: .85rem; }
+
+/* Full-screen editor */
+.editor { position: fixed; top: 0; left: 0; right: 0; height: 100%; height: 100dvh; z-index: 100; background: var(--bg); display: flex; flex-direction: column; }
+.ed-top {
+  display: flex; align-items: center; justify-content: space-between; gap: 10px;
+  padding: 10px 14px; padding-top: calc(10px + env(safe-area-inset-top, 0px));
+  background: #fff; border-bottom: 1px solid var(--line);
+}
+.ed-title { font-weight: 700; }
+.ed-stage { flex: 1; position: relative; overflow: hidden; touch-action: none; background: #dfe4ee; user-select: none; -webkit-user-select: none; }
+.pan { position: absolute; left: 0; top: 0; transform-origin: 0 0; will-change: transform; line-height: 0; box-shadow: 0 4px 20px rgba(18, 24, 38, .25); }
+.pan canvas { display: block; width: 100%; height: 100%; }
+.zoomctl { position: absolute; right: 10px; bottom: 10px; display: flex; flex-direction: column; gap: 8px; }
+.zb {
+  width: 42px; height: 42px; border-radius: 50%; border: 1px solid var(--line); background: #fff;
+  font: inherit; font-size: 1.15rem; font-weight: 700; color: var(--ink); cursor: pointer; box-shadow: 0 2px 8px rgba(18, 24, 38, .2);
+}
+.zb:focus-visible { outline: 3px solid rgba(59, 91, 255, .45); }
+.brush-preview {
+  position: absolute; left: 50%; top: 50%; border-radius: 50%; transform: translate(-50%, -50%);
+  border: 2px solid #fff; box-shadow: 0 0 0 1px rgba(0, 0, 0, .55); pointer-events: none; opacity: 0; transition: opacity .2s;
+}
+.brush-preview.on { opacity: 1; }
+.ed-bottom { background: #fff; border-top: 1px solid var(--line); padding: 10px 14px; padding-bottom: calc(12px + env(safe-area-inset-bottom, 0px)); }
+.ed-tools { display: grid; grid-template-columns: repeat(6, 1fr); gap: 6px; }
+.et {
+  display: flex; flex-direction: column; align-items: center; gap: 3px; padding: 8px 2px;
+  border: 1px solid transparent; border-radius: 10px; background: transparent;
+  font: inherit; font-size: .72rem; font-weight: 600; color: var(--muted); cursor: pointer;
+}
+.et[aria-pressed="true"] { background: #eef2ff; color: var(--accent-dark); border-color: var(--accent); }
+.et:disabled { opacity: .35; cursor: default; }
+.et:focus-visible { outline: 3px solid rgba(59, 91, 255, .45); }
+.ed-size { display: flex; align-items: center; gap: 12px; margin-top: 8px; }
+.ed-size label { font-size: .9rem; color: var(--muted); min-width: 64px; }
+.ed-size input { flex: 1; accent-color: var(--accent); height: 28px; }
+.ed-tip { margin-top: 6px; color: var(--muted); font-size: .8rem; line-height: 1.45; }
+
+@media (prefers-reduced-motion: reduce) {
+  .bar .fill { transition: none; }
+  .drop, .brush-preview { transition: none; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <img src="favicon.svg" width="30" height="30" alt="" style="border-radius:9px">
+    <span class="brand">SnapClean</span>
+  </header>
+
+  <main>
+    <h1>Remove image backgrounds in seconds</h1>
+    <p class="lead">Free, unlimited and private. Your photo is processed on your own device and is never uploaded.</p>
+    <p class="pill" id="pill" data-state="loading"><span class="dot"></span><span id="pillText">Getting ready...</span></p>
+
+    <section class="card" id="stageUpload">
+      <label class="drop" id="drop" for="fileInput">
+        <input class="sr-only" type="file" id="fileInput" accept="image/*">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M12 16V4m0 0L7 9m5-5 5 5"/><path d="M4 16v3a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-3"/>
+        </svg>
+        <span class="title">Choose a photo</span>
+        <span class="sub">or drag and drop it here</span>
+        <span class="hint">JPG, PNG or WebP</span>
+      </label>
+      <p class="error" id="error" role="alert" hidden></p>
+    </section>
+
+    <section class="card busy" id="stageBusy" hidden>
+      <p class="status" id="status" aria-live="polite">Preparing your photo</p>
+      <p class="pct" id="pct">0%</p>
+      <div class="bar" id="bar" role="progressbar" aria-label="Processing" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span class="fill" id="fill"></span></div>
+      <p class="note">Everything runs on your phone, so the speed depends on your device. The first photo can take a little longer.</p>
+    </section>
+
+    <section class="card" id="stageResult" hidden>
+      <div class="compare" id="compare">
+        <img id="beforeImg" alt="Original photo">
+        <div class="after checker" id="afterLayer"><canvas id="view"></canvas></div>
+        <input type="range" id="slider" min="0" max="100" value="50" aria-label="Compare original and result">
+        <div class="handle">
+          <div class="knob">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 7-5 5 5 5M15 7l5 5-5 5"/></svg>
+          </div>
+        </div>
+        <span class="tag l">Original</span>
+        <span class="tag r">Result</span>
+      </div>
+
+      <div class="bgrow" id="bgrow">
+        <span class="label">Background</span>
+        <button type="button" class="sw checker" data-color="" aria-label="Transparent" aria-pressed="true"></button>
+        <button type="button" class="sw" data-color="#ffffff" style="background:#ffffff" aria-label="White" aria-pressed="false"></button>
+        <button type="button" class="sw" data-color="#000000" style="background:#000000" aria-label="Black" aria-pressed="false"></button>
+        <button type="button" class="sw" data-color="#3b5bff" style="background:#3b5bff" aria-label="Blue" aria-pressed="false"></button>
+        <label class="sw custom" id="customSw" title="Pick a color" aria-pressed="false">
+          <input type="color" id="customColor" value="#ffd43b" aria-label="Custom color">
+        </label>
+      </div>
+
+      <div class="actions">
+        <button type="button" class="btn secondary wide" id="refineBtn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9.06 11.9 8.07-8.06a2.85 2.85 0 1 1 4.03 4.03l-8.06 8.08"/><path d="M7.07 14.94c-1.66 0-3 1.35-3 3.02 0 1.33-2.5 1.52-2 2.02 1.08 1.1 2.49 2.02 4 2.02 2.2 0 4-1.8 4-4.04a3.01 3.01 0 0 0-3-3.02z"/></svg>
+          Refine with brush
+        </button>
+        <button type="button" class="btn primary" id="downloadBtn">Download PNG</button>
+        <button type="button" class="btn secondary" id="resetBtn">New photo</button>
+      </div>
+    </section>
+
+    <ul class="points">
+      <li><strong>Free and unlimited</strong><span>No sign-up, no limits, no watermark.</span></li>
+      <li><strong>Private by design</strong><span>Photos stay on your device while the AI works.</span></li>
+      <li><strong>Fine-tune with a brush</strong><span>Erase leftovers or restore details by hand.</span></li>
+    </ul>
+  </main>
+
+  <footer>&copy; <span id="year"></span> SnapClean. All rights reserved. Your photos never leave your device.</footer>
+</div>
+
+<!-- Full-screen editor -->
+<div class="editor" id="editor" hidden>
+  <div class="ed-top">
+    <button type="button" class="btn secondary small" id="edCancel">Cancel</button>
+    <span class="ed-title">Refine</span>
+    <button type="button" class="btn primary small" id="edDone">Done</button>
+  </div>
+
+  <div class="ed-stage" id="stage">
+    <div class="pan checker" id="pan"><canvas id="edit"></canvas></div>
+    <div class="brush-preview" id="brushPreview"></div>
+    <div class="zoomctl">
+      <button type="button" class="zb" id="zIn" aria-label="Zoom in">+</button>
+      <button type="button" class="zb" id="zOut" aria-label="Zoom out">&minus;</button>
+      <button type="button" class="zb" id="zFit" aria-label="Fit to screen" style="font-size:.7rem">Fit</button>
+    </div>
+  </div>
+
+  <div class="ed-bottom">
+    <div class="ed-tools">
+      <button type="button" class="et" data-tool="erase" aria-pressed="true">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m7 21-4.3-4.3a1 1 0 0 1 0-1.4l9.6-9.6a1 1 0 0 1 1.4 0l5.6 5.6a1 1 0 0 1 0 1.4L11 21z"/><path d="M22 21H7"/></svg>
+        Erase
+      </button>
+      <button type="button" class="et" data-tool="restore" aria-pressed="false">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9.06 11.9 8.07-8.06a2.85 2.85 0 1 1 4.03 4.03l-8.06 8.08"/><path d="M7.07 14.94c-1.66 0-3 1.35-3 3.02 0 1.33-2.5 1.52-2 2.02 1.08 1.1 2.49 2.02 4 2.02 2.2 0 4-1.8 4-4.04a3.01 3.01 0 0 0-3-3.02z"/></svg>
+        Restore
+      </button>
+      <button type="button" class="et" data-tool="move" aria-pressed="false">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 9-3 3 3 3M9 5l3-3 3 3M15 19l-3 3-3-3M19 9l3 3-3 3M2 12h20M12 2v20"/></svg>
+        Move
+      </button>
+      <button type="button" class="et" id="undoBtn" disabled>
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 14 4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 5.5 5.5 5.5 5.5 0 0 1-5.5 5.5H11"/></svg>
+        Undo
+      </button>
+      <button type="button" class="et" id="redoBtn" disabled>
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 14 5-5-5-5"/><path d="M20 9H9.5A5.5 5.5 0 0 0 4 14.5 5.5 5.5 0 0 0 9.5 20H13"/></svg>
+        Redo
+      </button>
+      <button type="button" class="et" id="resetAllBtn">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>
+        Reset
+      </button>
+    </div>
+    <div class="ed-size"><label for="sizeRange">Brush size</label><input type="range" id="sizeRange" min="8" max="100" value="34"></div>
+    <p class="ed-tip">One finger paints. Two fingers zoom and move. Restore shows removed areas faintly.</p>
+  </div>
+</div>
+
+<script type="module">
+const LIB_URL = 'https://esm.sh/@imgly/background-removal@1.7.0';
+const MODEL_URL = 'https://staticimgly.com/@imgly/background-removal-data/1.7.0/dist/';
+const MAX_SIZE = 1280;
+const MAX_UNDO = 10;
+
+const $ = (id) => document.getElementById(id);
+const stages = ['stageUpload', 'stageBusy', 'stageResult'];
+const show = (name) => stages.forEach((id) => { $(id).hidden = id !== name; });
+$('year').textContent = new Date().getFullYear();
+
+/* ---------- Model status and loading ---------- */
+const downloaded = {};
+let modelReady = false;
+let stage = 'Preparing your photo';
+
+function setPill(state, text) {
+  $('pill').dataset.state = state;
+  $('pillText').textContent = text;
+}
+
+const dlTotal = {};
+let progressHook = null;
+
+function sumOf(o) { return Object.values(o).reduce((a, b) => a + b, 0); }
+
+function onProgress(key, current, total) {
+  if (key.startsWith('fetch')) {
+    downloaded[key] = current;
+    if (total > 0) dlTotal[key] = total;
+    const cur = sumOf(downloaded);
+    if (!modelReady) setPill('loading', 'Getting ready...');
+    if (progressHook) progressHook(key, cur, sumOf(dlTotal));
+  } else if (progressHook) {
+    progressHook(key, current, total);
+  }
+}
+
+const cfg = { publicPath: MODEL_URL, model: 'isnet_quint8', progress: onProgress };
+
+let worker = null;
+let jobHandler = null;
+let mainLib = null;
+let engineMode = 'worker';
+
+async function loadMainLib() {
+  if (!mainLib) mainLib = await import(LIB_URL);
+  return mainLib;
+}
+
+function dropWorker() {
+  engineMode = 'main';
+  if (worker) { worker.terminate(); worker = null; }
+}
+
+function startEngine() {
+  try {
+    worker = new Worker('worker.js', { type: 'module' });
+    worker.onmessage = (e) => {
+      const d = e.data;
+      if (d.type === 'progress') { onProgress(d.key, d.current, d.total); return; }
+      if (jobHandler) jobHandler(d);
+    };
+    worker.onerror = (e) => {
+      if (jobHandler) jobHandler({ type: 'error', message: (e && e.message) || 'Worker failed' });
+      else dropWorker();
+    };
+  } catch (err) {
+    dropWorker();
+  }
+}
+
+function callWorker(msg) {
+  return new Promise((resolve, reject) => {
+    jobHandler = (d) => {
+      if (d.type === 'error') {
+        jobHandler = null;
+        reject(new Error(d.message));
+      } else if (d.type === 'preloaded' || d.type === 'done') {
+        jobHandler = null;
+        resolve(d);
+      }
+    };
+    worker.postMessage(msg);
+  });
+}
+
+async function preloadEngine() {
+  if (worker) {
+    try {
+      await callWorker({ type: 'preload', publicPath: MODEL_URL, model: 'isnet_quint8' });
+      return;
+    } catch (err) {
+      console.warn('Worker preload failed, using main thread', err);
+      dropWorker();
+    }
+  }
+  const lib = await loadMainLib();
+  if (typeof lib.preload === 'function') await lib.preload(cfg);
+}
+
+async function removeBg(small) {
+  if (worker) {
+    try {
+      const d = await callWorker({ type: 'remove', blob: small, publicPath: MODEL_URL, model: 'isnet_quint8' });
+      return d.blob;
+    } catch (err) {
+      console.warn('Worker failed, using main thread', err);
+      dropWorker();
+    }
+  }
+  const lib = await loadMainLib();
+  return lib.removeBackground(small, cfg);
+}
+
+startEngine();
+const preloadPromise = preloadEngine()
+  .then(() => {
+    modelReady = true;
+    setPill('ready', 'Ready to use');
+  })
+  .catch((err) => {
+    console.warn('Preload failed', err);
+    setPill('idle', 'Ready to use');
+  });
+
+/* ---------- Helpers ---------- */
+function showError(msg) { const e = $('error'); e.textContent = msg; e.hidden = false; }
+function clearError() { $('error').hidden = true; }
+
+async function shrinkImage(file, maxSize) {
+  const img = await createImageBitmap(file);
+  const scale = Math.min(1, maxSize / Math.max(img.width, img.height));
+  const canvas = document.createElement('canvas');
+  canvas.width = Math.round(img.width * scale);
+  canvas.height = Math.round(img.height * scale);
+  canvas.getContext('2d').drawImage(img, 0, 0, canvas.width, canvas.height);
+  img.close();
+  return new Promise((resolve) => canvas.toBlob(resolve, 'image/png'));
+}
+
+async function loadImg(url) {
+  const img = new Image();
+  img.src = url;
+  await img.decode();
+  return img;
+}
+
+/* ---------- Image state ---------- */
+const view = $('view');
+const vctx = view.getContext('2d');
+const edit = $('edit');
+const ectx = edit.getContext('2d');
+
+let origCanvas = null;
+let maskCanvas = null;
+let mctx = null;
+let tmpCanvas = null;
+let tctx = null;
+let initialSnap = null;
+let openSnap = null;
+let undoStack = [];
+let redoStack = [];
+let beforeUrl = null;
+let bgColor = null;
+let tool = 'erase';
+let editorOpen = false;
+let raf = 0;
+
+/* Mask snapshots store only the alpha channel to save memory */
+function snapshot() {
+  const w = maskCanvas.width;
+  const h = maskCanvas.height;
+  const d = mctx.getImageData(0, 0, w, h).data;
+  const a = new Uint8Array(w * h);
+  for (let i = 0, j = 0; j < a.length; i += 4, j++) a[j] = d[i + 3];
+  return a;
+}
+function applySnapshot(a) {
+  const w = maskCanvas.width;
+  const h = maskCanvas.height;
+  const img = mctx.createImageData(w, h);
+  const d = img.data;
+  for (let j = 0, i = 0; j < a.length; j++, i += 4) {
+    d[i] = 255; d[i + 1] = 255; d[i + 2] = 255; d[i + 3] = a[j];
+  }
+  mctx.putImageData(img, 0, 0);
+}
+
+function composite() {
+  tctx.globalCompositeOperation = 'source-over';
+  tctx.clearRect(0, 0, tmpCanvas.width, tmpCanvas.height);
+  tctx.drawImage(origCanvas, 0, 0);
+  tctx.globalCompositeOperation = 'destination-in';
+  tctx.drawImage(maskCanvas, 0, 0);
+  tctx.globalCompositeOperation = 'source-over';
+}
+
+function render() {
+  if (!origCanvas) return;
+  composite();
+  const c = editorOpen ? ectx : vctx;
+  const cv = editorOpen ? edit : view;
+  c.clearRect(0, 0, cv.width, cv.height);
+  if (editorOpen && tool === 'restore') {
+    c.globalAlpha = 0.4;
+    c.drawImage(origCanvas, 0, 0);
+    c.globalAlpha = 1;
+  }
+  c.drawImage(tmpCanvas, 0, 0);
+}
+function scheduleRender() {
+  if (raf) return;
+  raf = requestAnimationFrame(() => { raf = 0; render(); });
+}
+
+async function loadEditorImages(small, result) {
+  if (beforeUrl) URL.revokeObjectURL(beforeUrl);
+  beforeUrl = URL.createObjectURL(small);
+  const resultUrl = URL.createObjectURL(result);
+  const [oImg, rImg] = await Promise.all([loadImg(beforeUrl), loadImg(resultUrl)]);
+  URL.revokeObjectURL(resultUrl);
+
+  const w = rImg.naturalWidth;
+  const h = rImg.naturalHeight;
+
+  origCanvas = document.createElement('canvas');
+  origCanvas.width = w; origCanvas.height = h;
+  origCanvas.getContext('2d').drawImage(oImg, 0, 0, w, h);
+
+  maskCanvas = document.createElement('canvas');
+  maskCanvas.width = w; maskCanvas.height = h;
+  mctx = maskCanvas.getContext('2d', { willReadFrequently: true });
+  mctx.drawImage(rImg, 0, 0, w, h);
+
+  tmpCanvas = document.createElement('canvas');
+  tmpCanvas.width = w; tmpCanvas.height = h;
+  tctx = tmpCanvas.getContext('2d');
+
+  view.width = w;
+  view.height = h;
+  edit.width = w;
+  edit.height = h;
+
+  initialSnap = snapshot();
+  undoStack = [];
+  redoStack = [];
+  editorOpen = false;
+  render();
+
+  $('beforeImg').src = beforeUrl;
+  $('slider').value = 50;
+  $('compare').style.setProperty('--pos', '50%');
+  setBackground(null, document.querySelector('.sw[data-color=""]'));
+}
+
+/* ---------- Processing ---------- */
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+
+function loadEst() {
+  try {
+    const v = parseInt(localStorage.getItem('snapclean_ms'), 10);
+    return v > 1500 ? v : 12000;
+  } catch (e) { return 12000; }
+}
+function saveEst(ms) {
+  try { localStorage.setItem('snapclean_ms', String(Math.round(Math.min(90000, Math.max(3000, ms))))); } catch (e) {}
+}
+
+async function processFile(file) {
+  if (!file || !file.type.startsWith('image/')) {
+    showError('Please choose an image file (JPG, PNG or WebP).');
+    return;
+  }
+  clearError();
+  show('stageBusy');
+
+  const pctEl = $('pct');
+  const fill = $('fill');
+  const bar = $('bar');
+  const status = $('status');
+
+  fill.style.transition = 'none';
+  fill.style.width = '0%';
+  fill.offsetWidth;
+  fill.style.transition = '';
+
+  let pct = 0;
+  const setPct = (v) => {
+    pct = Math.max(pct, Math.min(100, v));
+    const r = Math.round(pct);
+    pctEl.textContent = r + '%';
+    fill.style.width = pct + '%';
+    bar.setAttribute('aria-valuenow', String(r));
+  };
+  setPct(0);
+  status.textContent = 'Preparing your photo';
+
+  let phase = 'prepare';
+  let phaseStart = Date.now();
+  let base = 0;
+  let dlPct = 0;
+  let bump = 0;
+  const tau = loadEst() * 0.45;
+
+  progressHook = (key, current, total) => {
+    if (key.startsWith('fetch')) {
+      if (!modelReady && total > 0) dlPct = Math.min(1, current / total);
+    } else if (key.indexOf('compute:mask') === 0) {
+      bump = Math.max(bump, 92);
+    } else if (key.indexOf('compute:encode') === 0) {
+      bump = Math.max(bump, 96);
+    }
+  };
+
+  const timer = setInterval(() => {
+    if (phase === 'download') {
+      setPct(5 + 45 * dlPct);
+    } else if (phase === 'infer') {
+      const t = Date.now() - phaseStart;
+      const curve = base + (95 - base) * (1 - Math.exp(-t / tau));
+      setPct(Math.max(curve, bump));
+    }
+  }, 100);
+
+  try {
+    const small = await shrinkImage(file, MAX_SIZE);
+    setPct(5);
+
+    if (!modelReady) {
+      phase = 'download';
+      status.textContent = 'Getting things ready (first time only)';
+      await preloadPromise;
+    }
+
+    base = pct;
+    phase = 'infer';
+    phaseStart = Date.now();
+    status.textContent = 'Removing the background';
+
+    const t0 = Date.now();
+    const result = await removeBg(small);
+    saveEst(Date.now() - t0);
+
+    phase = 'done';
+    status.textContent = 'Finishing up';
+    setPct(97);
+    await loadEditorImages(small, result);
+    setPct(100);
+    status.textContent = 'Done';
+    await sleep(450);
+    show('stageResult');
+  } catch (err) {
+    console.error(err);
+    show('stageUpload');
+    showError('Could not remove the background: ' + err.message + '. Check your connection, try a smaller photo, or reload the page.');
+  } finally {
+    clearInterval(timer);
+    progressHook = null;
+  }
+}
+
+/* ---------- Upload events ---------- */
+$('fileInput').addEventListener('change', (e) => {
+  const file = e.target.files[0];
+  e.target.value = '';
+  processFile(file);
+});
+const drop = $('drop');
+['dragenter', 'dragover'].forEach((ev) => drop.addEventListener(ev, (e) => { e.preventDefault(); drop.classList.add('over'); }));
+['dragleave', 'drop'].forEach((ev) => drop.addEventListener(ev, (e) => { e.preventDefault(); drop.classList.remove('over'); }));
+drop.addEventListener('drop', (e) => processFile(e.dataTransfer.files[0]));
+
+/* ---------- Compare slider ---------- */
+$('slider').addEventListener('input', (e) => {
+  $('compare').style.setProperty('--pos', e.target.value + '%');
+});
+
+/* ---------- Background ---------- */
+function setBackground(color, activeEl) {
+  bgColor = color;
+  const layer = $('afterLayer');
+  layer.classList.toggle('checker', !color);
+  layer.style.backgroundColor = color || '';
+  document.querySelectorAll('.sw').forEach((el) => el.setAttribute('aria-pressed', String(el === activeEl)));
+}
+document.querySelectorAll('.sw[data-color]').forEach((btn) => {
+  btn.addEventListener('click', () => setBackground(btn.dataset.color || null, btn));
+});
+$('customColor').addEventListener('input', (e) => setBackground(e.target.value, $('customSw')));
+
+/* ---------- Editor: pan and zoom ---------- */
+const stageEl = $('stage');
+const pan = $('pan');
+let sc = 1;
+let tx = 0;
+let ty = 0;
+let baseW = 0;
+let baseH = 0;
+
+function applyT() { pan.style.transform = 'translate(' + tx + 'px, ' + ty + 'px) scale(' + sc + ')'; }
+function clampT() {
+  const W = stageEl.clientWidth;
+  const H = stageEl.clientHeight;
+  const m = 60;
+  tx = Math.min(W - m, Math.max(m - baseW * sc, tx));
+  ty = Math.min(H - m, Math.max(m - baseH * sc, ty));
+}
+function fit() {
+  const W = stageEl.clientWidth;
+  const H = stageEl.clientHeight;
+  const pad = 12;
+  const ar = origCanvas.width / origCanvas.height;
+  baseW = Math.min(W - pad * 2, (H - pad * 2) * ar);
+  baseH = baseW / ar;
+  pan.style.width = baseW + 'px';
+  pan.style.height = baseH + 'px';
+  sc = 1;
+  tx = (W - baseW) / 2;
+  ty = (H - baseH) / 2;
+  applyT();
+}
+function zoomAt(factor, cx, cy) {
+  const ns = Math.min(8, Math.max(1, sc * factor));
+  const px = (cx - tx) / sc;
+  const py = (cy - ty) / sc;
+  sc = ns;
+  if (sc <= 1.001) { fit(); return; }
+  tx = cx - px * sc;
+  ty = cy - py * sc;
+  clampT();
+  applyT();
+}
+$('zIn').addEventListener('click', () => zoomAt(1.5, stageEl.clientWidth / 2, stageEl.clientHeight / 2));
+$('zOut').addEventListener('click', () => zoomAt(1 / 1.5, stageEl.clientWidth / 2, stageEl.clientHeight / 2));
+$('zFit').addEventListener('click', fit);
+stageEl.addEventListener('wheel', (e) => {
+  e.preventDefault();
+  const r = stageEl.getBoundingClientRect();
+  zoomAt(e.deltaY < 0 ? 1.15 : 1 / 1.15, e.clientX - r.left, e.clientY - r.top);
+}, { passive: false });
+
+/* ---------- Editor: tools, undo, redo ---------- */
+function updateButtons() {
+  $('undoBtn').disabled = undoStack.length === 0;
+  $('redoBtn').disabled = redoStack.length === 0;
+}
+function pushUndo() {
+  undoStack.push(snapshot());
+  if (undoStack.length > MAX_UNDO) undoStack.shift();
+  redoStack = [];
+  updateButtons();
+}
+$('undoBtn').addEventListener('click', () => {
+  const s = undoStack.pop();
+  if (!s) return;
+  redoStack.push(snapshot());
+  applySnapshot(s);
+  render();
+  updateButtons();
+});
+$('redoBtn').addEventListener('click', () => {
+  const s = redoStack.pop();
+  if (!s) return;
+  undoStack.push(snapshot());
+  applySnapshot(s);
+  render();
+  updateButtons();
+});
+$('resetAllBtn').addEventListener('click', () => {
+  pushUndo();
+  applySnapshot(initialSnap);
+  render();
+});
+
+function setTool(t) {
+  tool = t;
+  document.querySelectorAll('.et[data-tool]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.tool === t)));
+  render();
+}
+document.querySelectorAll('.et[data-tool]').forEach((b) => b.addEventListener('click', () => setTool(b.dataset.tool)));
+
+const bp = $('brushPreview');
+let bpTimer = 0;
+$('sizeRange').addEventListener('input', (e) => {
+  bp.style.width = bp.style.height = e.target.value + 'px';
+  bp.classList.add('on');
+  clearTimeout(bpTimer);
+  bpTimer = setTimeout(() => bp.classList.remove('on'), 700);
+});
+
+/* ---------- Editor: brush ---------- */
+function stamp(x, y, r) {
+  mctx.globalCompositeOperation = tool === 'erase' ? 'destination-out' : 'source-over';
+  const g = mctx.createRadialGradient(x, y, r * 0.55, x, y, r);
+  g.addColorStop(0, 'rgba(255,255,255,1)');
+  g.addColorStop(1, 'rgba(255,255,255,0)');
+  mctx.fillStyle = g;
+  mctx.beginPath();
+  mctx.arc(x, y, r, 0, Math.PI * 2);
+  mctx.fill();
+  mctx.globalCompositeOperation = 'source-over';
+}
+
+function pointerPos(e) {
+  const rect = edit.getBoundingClientRect();
+  return {
+    x: (e.clientX - rect.left) * edit.width / rect.width,
+    y: (e.clientY - rect.top) * edit.height / rect.height,
+    scale: edit.width / rect.width
+  };
+}
+function brushRadius(p) { return (parseFloat($('sizeRange').value) / 2) * p.scale; }
+
+const ptrs = new Map();
+let gesture = null;
+let drawing = false;
+let last = null;
+let strokeT = 0;
+let panLast = null;
+
+function strokeTo(p) {
+  const r = brushRadius(p);
+  const dx = p.x - last.x;
+  const dy = p.y - last.y;
+  const dist = Math.hypot(dx, dy);
+  const step = Math.max(1, r * 0.25);
+  const n = Math.max(1, Math.ceil(dist / step));
+  for (let i = 1; i <= n; i++) stamp(last.x + dx * i / n, last.y + dy * i / n, r);
+  last = p;
+}
+
+function startGesture() {
+  const [a, b] = [...ptrs.values()];
+  gesture = {
+    d0: Math.hypot(a.x - b.x, a.y - b.y) || 1,
+    m0: { x: (a.x + b.x) / 2, y: (a.y + b.y) / 2 },
+    s0: sc, tx0: tx, ty0: ty
+  };
+}
+function doGesture() {
+  const [a, b] = [...ptrs.values()];
+  const d = Math.hypot(a.x - b.x, a.y - b.y) || 1;
+  const m = { x: (a.x + b.x) / 2, y: (a.y + b.y) / 2 };
+  const r = stageEl.getBoundingClientRect();
+  const px = (gesture.m0.x - r.left - gesture.tx0) / gesture.s0;
+  const py = (gesture.m0.y - r.top - gesture.ty0) / gesture.s0;
+  sc = Math.min(8, Math.max(1, gesture.s0 * d / gesture.d0));
+  tx = (m.x - r.left) - px * sc;
+  ty = (m.y - r.top) - py * sc;
+  clampT();
+  applyT();
+}
+
+stageEl.addEventListener('pointerdown', (e) => {
+  if (e.target.closest('.zoomctl')) return;
+  e.preventDefault();
+  stageEl.setPointerCapture(e.pointerId);
+  ptrs.set(e.pointerId, { x: e.clientX, y: e.clientY });
+
+  if (ptrs.size === 2) {
+    if (drawing) {
+      drawing = false;
+      if (performance.now() - strokeT < 300) {
+        const s = undoStack.pop();
+        if (s) { applySnapshot(s); scheduleRender(); updateButtons(); }
+      }
+    }
+    startGesture();
+  } else if (ptrs.size === 1) {
+    if (tool === 'move') {
+      panLast = { x: e.clientX, y: e.clientY };
+    } else {
+      pushUndo();
+      drawing = true;
+      strokeT = performance.now();
+      last = pointerPos(e);
+      stamp(last.x, last.y, brushRadius(last));
+      scheduleRender();
+    }
+  }
+});
+
+stageEl.addEventListener('pointermove', (e) => {
+  if (!ptrs.has(e.pointerId)) return;
+  ptrs.set(e.pointerId, { x: e.clientX, y: e.clientY });
+  if (ptrs.size >= 2 && gesture) {
+    doGesture();
+  } else if (ptrs.size === 1) {
+    if (tool === 'move' && panLast) {
+      tx += e.clientX - panLast.x;
+      ty += e.clientY - panLast.y;
+      panLast = { x: e.clientX, y: e.clientY };
+      clampT();
+      applyT();
+    } else if (drawing) {
+      strokeTo(pointerPos(e));
+      scheduleRender();
+    }
+  }
+});
+
+function endPointer(e) {
+  ptrs.delete(e.pointerId);
+  if (ptrs.size < 2) gesture = null;
+  if (ptrs.size === 0) { drawing = false; panLast = null; }
+  if (ptrs.size === 1) {
+    const [p] = [...ptrs.values()];
+    panLast = { x: p.x, y: p.y };
+  }
+}
+stageEl.addEventListener('pointerup', endPointer);
+stageEl.addEventListener('pointercancel', endPointer);
+
+/* ---------- Editor: open and close ---------- */
+function openEditor() {
+  if (!origCanvas) return;
+  editorOpen = true;
+  openSnap = snapshot();
+  undoStack = [];
+  redoStack = [];
+  updateButtons();
+  pan.classList.toggle('checker', !bgColor);
+  pan.style.backgroundColor = bgColor || '';
+  $('editor').hidden = false;
+  document.body.style.overflow = 'hidden';
+  setTool('erase');
+  fit();
+  render();
+}
+function closeEditor(keep) {
+  if (!keep && openSnap) applySnapshot(openSnap);
+  editorOpen = false;
+  ptrs.clear();
+  gesture = null;
+  drawing = false;
+  $('editor').hidden = true;
+  document.body.style.overflow = '';
+  render();
+}
+$('refineBtn').addEventListener('click', openEditor);
+$('edDone').addEventListener('click', () => closeEditor(true));
+$('edCancel').addEventListener('click', () => closeEditor(false));
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && editorOpen) closeEditor(false); });
+
+/* ---------- Download and reset ---------- */
+$('downloadBtn').addEventListener('click', () => {
+  if (!origCanvas) return;
+  render();
+  const out = document.createElement('canvas');
+  out.width = view.width;
+  out.height = view.height;
+  const ctx = out.getContext('2d');
+  if (bgColor) { ctx.fillStyle = bgColor; ctx.fillRect(0, 0, out.width, out.height); }
+  ctx.drawImage(view, 0, 0);
+  out.toBlob((blob) => {
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'snapclean.png';
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 4000);
+  }, 'image/png');
+});
+
+$('resetBtn').addEventListener('click', () => {
+  clearError();
+  show('stageUpload');
+});
+</script>
+</body>
+</html>
